@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  deye-dummycloud:
+    image: deye-dummycloud:${DEYE_DUMMYCLOUD_VERSION}
+    container_name: deye-dummycloud
+    restart: unless-stopped
+    environment:
+      LOGLEVEL: ${LOG_LEVEL}
+      MQTT_BROKER_URL: ${MQTT_BROKER_URL}
+      MQTT_USERNAME: ${MQTT_USERNAME}
+      MQTT_PASSWORD: ${MQTT_PASSWORD}
+      MQTT_SELF_SIGNED: ${MQTT_SELF_SIGNED}
+    ports:
+      - "10000:10000"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    name: monitoring
+    external: true
